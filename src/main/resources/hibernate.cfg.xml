@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="show_sql">true</property><!-- показывать sql запросы -->
+        <property name="format_sql">true</property><!--форматировать sql запросы-->
+        <property name="dialect">org.hibernate.dialect.DerbyTenSevenDialect</property><!--выбранный диалетк для БД-->
+        <property name="connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property><!--jdbc драйвер-->
+        <property name="connection.url">jdbc:derby:mydb.db;create=true</property><!--параметры подключения к БД-->
+        <property name="connection.username">root</property> <!--// логин к БД-->
+        <property name="connection.password">root</property> <!--// пароль к БД-->
+        <property name="hibernate.hbm2ddl.auto">create-drop</property><!--// параметр отвечающий за создание БД при каждом запуске приложения-->
+
+        <!--Классы которые являются модельными-->
+        <mapping class="model.Item"/>
+        <mapping class="model.User"/>
+        <mapping class="model.Bid"/>
+    </session-factory>
+</hibernate-configuration>
