@@ -13,7 +13,7 @@ public class BaseEntity {
     @GeneratedValue
     private Integer id;
 
-    public void setBid(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

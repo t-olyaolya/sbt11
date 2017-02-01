@@ -36,7 +36,7 @@ public class Main {
                 configureSessionFactory();
         Session session = null;
         Transaction tx=null;
-//        sessionFactory = Main.configureSessionFactory();
+
         try {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
@@ -70,6 +70,7 @@ public class Main {
             session.persist(item3);
             session.persist(bid1);
             session.persist(bid2);
+            tx.commit();
 
             tx = session.beginTransaction();
             List<User> userList = session.createCriteria(User.class).list();

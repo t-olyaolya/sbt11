@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,13 +13,10 @@ public class User extends BaseEntity{
     @Column
     private String name;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Item> itemList;
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private Bid bid;
+    private List<Item> itemList = new ArrayList<Item>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Bid> bidList = new ArrayList<Bid>();
 
-    public void setBid(Integer bid) {
-        super.setBid(bid);
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -28,12 +26,20 @@ public class User extends BaseEntity{
         this.itemList = itemList;
     }
 
-    public String getName() {
-        return name;
+    public void setItem (Item item) {
+        itemList.add(item);
     }
 
-    public Bid getBid() {
-        return bid;
+    public void setBidList(List<Bid> bidList) {
+        this.bidList = bidList;
+    }
+
+    public void setBid (Bid bid) {
+        bidList.add(bid);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public List<Item> getItemList() {
