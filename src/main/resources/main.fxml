@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <children>
+        <HBox prefHeight="286.0" prefWidth="551.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <children>
+                <FlowPane prefHeight="158.0" prefWidth="551.0">
+                    <children>
+                            <Label alignment="TOP_CENTER" text="Пользователи">
+                                <FlowPane.margin>
+                                    <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                                </FlowPane.margin>
+                            </Label>
+                            <ListView fx:id="userList" prefHeight="200.0" prefWidth="200.0" />
+                    </children>
+                </FlowPane>
+                <FlowPane prefHeight="133.0" prefWidth="551.0">
+                <children>
+                        <Label alignment="TOP_CENTER" text="Товары">
+                        <FlowPane.margin>
+                            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                        </FlowPane.margin>
+                        </Label>
+                        <ListView fx:id="itemList" prefHeight="200.0" prefWidth="200.0" />
+                    </children>
+                </FlowPane>
+                <FlowPane  prefHeight="164.0" prefWidth="551.0">
+                    <children>
+                        <Label alignment="TOP_CENTER" text="Сделки">
+                            <FlowPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                            </FlowPane.margin>
+                        </Label>
+                        <ListView fx:id="bidList" prefHeight="200.0" prefWidth="200.0" />
+                    </children>
+                </FlowPane>
+            </children>
+        </HBox>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+</GridPane>

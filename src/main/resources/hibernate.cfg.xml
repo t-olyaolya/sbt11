@@ -9,7 +9,7 @@
         <property name="connection.driver_class">org.hsqldb.jdbc.JDBCDriver</property>
         <property name="connection.url">jdbc:hsqldb:mem;create=true</property>
         <property name="connection.username">SA</property>
-        <property name="connection.password"></property>
+        <property name="connection.password">root</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <mapping class="model.Item"/>
         <mapping class="model.User"/>

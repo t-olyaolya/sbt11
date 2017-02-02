@@ -12,14 +12,29 @@ import java.util.List;
 public class User extends BaseEntity{
     @Column
     private String name;
+    @Column
+    private String password;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Item> itemList = new ArrayList<Item>();
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Bid> bidList = new ArrayList<Bid>();
 
+    public User() {
+
+    }
+
+    public User(String  name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setItemList(List<Item> itemList) {
@@ -42,7 +57,19 @@ public class User extends BaseEntity{
         return name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public List<Item> getItemList() {
         return itemList;
     }
+
+    public boolean checkPassword (String password) {
+        if (!(this.password.equals(password)))
+            return false;
+        return true;
+    }
+
+
 }
