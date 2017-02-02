@@ -58,12 +58,11 @@ public class Controller {
     public void registryListener(MouseEvent mouseEvent) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("info.fxml"));
         nameAndPass(root);
-        if (controllerDB.checkName(login.getText(), password.getText())) {
+        boolean flag = controllerDB.checkName(login.getText(), password.getText());
+        if (flag) {
             newInfoWindow("Пользователь с таким именем уже есть", root);
-            controllerDB.closeSession();
             }
             else {
-                controllerDB.closeSession();
                 controllerDB.createUser(login.getText(), password.getText());
                 newInfoWindow("Регистрация закончена", root);
             }

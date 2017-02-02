@@ -22,6 +22,18 @@ public class ControllerDB {
     private static Session session = null;
     private static Transaction tx = null;
 
+    ControllerDB() {
+            if (session == null) {
+                sessionFactory = configureSessionFactory();
+                session = sessionFactory.openSession();
+                fillDB();
+            }
+            if (!session.isOpen()) {
+                session = sessionFactory.openSession();
+            }
+            //tx = session.beginTransaction();
+        }
+
     public SessionFactory configureSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.configure();
@@ -32,7 +44,7 @@ public class ControllerDB {
         return sessionFactory;
     }
 
-    public void createSession()  {
+    /*public void createSession()  {
         if (session == null) {
             sessionFactory = configureSessionFactory();
             session = sessionFactory.openSession();
@@ -42,7 +54,7 @@ public class ControllerDB {
             session = sessionFactory.openSession();
         }
         tx = session.beginTransaction();
-    }
+    } */
 
     public void closeSession() {
         if (session != null) {
@@ -63,7 +75,7 @@ public class ControllerDB {
    public User createUser(String name, String password){
         User user = new User();
         try {
-            createSession();
+            tx = session.beginTransaction();
             user.setName(name);
             user.setPassword(password);
             session.persist(user);
@@ -81,7 +93,7 @@ public class ControllerDB {
     public Item createItem(String name, User user, String description) {
         Item item = new Item();
         try {
-            createSession();
+            tx = session.beginTransaction();
             item.setName(name);
             item.setDescription(description);
             item.setUser(user);
@@ -100,7 +112,7 @@ public class ControllerDB {
     public Bid createBid(User user, Item item)  {
         Bid bid = new Bid();
         try {
-            createSession();
+            tx = session.beginTransaction();
             bid.setUser(user);
             user.setBid(bid);
             bid.setItem(item);
@@ -121,7 +133,7 @@ public class ControllerDB {
         try {
             userList = session.createCriteria(User.class).list();
             session.flush();
-            tx.commit();
+            //tx.commit();
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -133,7 +145,6 @@ public class ControllerDB {
     public  List<Item> getItems() {
         List<Item> itemList = null;
         try {
-            createSession();
             itemList = session.createCriteria(Item.class).list();
             session.flush();
             tx.commit();
@@ -148,7 +159,7 @@ public class ControllerDB {
     public  List<Bid> getBids() {
         List<Bid> bidList = null;
         try {
-            createSession();
+            tx = session.beginTransaction();
             bidList = session.createCriteria(Bid.class).list();
             session.flush();
             tx.commit();
@@ -163,7 +174,7 @@ public class ControllerDB {
 
     public boolean auth(String username, String password) {
         try {
-            createSession();
+            tx = session.beginTransaction();
             List<User> userList = session.createCriteria(User.class).list();
             for (User user : userList) {
                 if ((user.getName().equals(username)) && (user.getPassword().equals(password))) {
@@ -171,7 +182,6 @@ public class ControllerDB {
                 }
             }
             session.flush();
-            tx.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
             tx.rollback();
@@ -181,7 +191,6 @@ public class ControllerDB {
 
     public boolean checkName(String username, String password) {
         try {
-            createSession();
             List<User> userList = session.createCriteria(User.class).list();
             for (User user : userList) {
                 if ((user.getName().equals(username))) {
