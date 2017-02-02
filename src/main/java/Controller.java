@@ -60,9 +60,10 @@ public class Controller {
         nameAndPass(root);
         if (controllerDB.checkName(login.getText(), password.getText())) {
             newInfoWindow("Пользователь с таким именем уже есть", root);
-            //newInfoWindow("Регистрация закончена", root);
+            controllerDB.closeSession();
             }
             else {
+                controllerDB.closeSession();
                 controllerDB.createUser(login.getText(), password.getText());
                 newInfoWindow("Регистрация закончена", root);
             }
